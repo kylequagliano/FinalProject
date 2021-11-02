@@ -1,0 +1,28 @@
+---
+title: "Proposal"
+author: "Kyle Quagliano"
+date: "10/24/2021"
+output: html_document
+---
+DataURL:  https://www.atusdata.org/atus-action/extract_requests/download
+
+```{r}
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(readxl)
+data <- read.csv('atus_00002.csv')
+str(data)
+summarize(data)
+
+
+"The data set contains a mass of data mostly pertaining to peoples health, employment/income, Covid health/ job status because of covid and the region in the world they are located."
+
+"Questions I want to answer with the dataset:
+1. Did people who were not trying to look for employment in previous years, try harder to look for a job when covid hit?
+2.Did people make a new attempt at improving themselves/ find jobs after the pandemic?
+3.Does the family income of a person make them use less effort in trying to find a job?
+4. Are older or younger people trying harder to find employment?
+5. Are people with higher education more unemployed during the pandmeic?"
+```
+
