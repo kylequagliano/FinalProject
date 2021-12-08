@@ -20,9 +20,39 @@ summarize(data)
 
 "Questions I want to answer with the dataset:
 1. Did people who were not trying to look for employment in previous years, try harder to look for a job when covid hit?
-2.Did people make a new attempt at improving themselves/ find jobs after the pandemic?
-3.Does the family income of a person make them use less effort in trying to find a job?
-4. Are older or younger people trying harder to find employment?
-5. Are people with higher education more unemployed during the pandmeic?"
+2.Does the family income of a person make them use less effort in trying to find a job?
+3. Are older or younger people trying harder to find employment?
+4. Are people with higher education more unemployed during the pandmeic?"
+
+employmentStatusBefore <- data %>% filter(YEAR< 2020) %>% filter(FWK_EMPLR <3)
+employmentStatusAfter <- data %>% filter(YEAR >= 2020) %>% filter(FWK_EMPLR <3)
+summary(employmentStatusBefore$FWK_EMPLR)
+summary(employmentStatusAfter$FWK_EMPLR)
+summary(employmentStatusBefore$FWK_NOTHING)
+summary(employmentStatusAfter$FWK_NOTHING)
+"By looking at the summaries of the average value of people that looked for jobs there is no clear evidence that people tried harder to find a job when covid hit given that the average is slightly larger when covid hit it is not large enough to provide conclusive evidence that it did."
+familyIncome <- data.frame(data$FAMINCOME, data$FWK_EMPLR)
+summary(familyIncome)
+familyIncome <- familyIncome %>% filter(data.FAMINCOME > 13) %>% filter(data.FAMINCOME < 17) %>% filter(data.FWK_EMPLR < 2)
+boxplot(data.FAMINCOME~data.FWK_EMPLR, data=familyIncome, xlab="Looking for Work", ylab="Family Income", main="Family Income and looking for work")
+"By looking at the graph for family income and looking for work there is no noticeable correlation between the family income and their effort in trying to find a job."
+
+age <- data.frame(data$AGE, data$FWK_EMPLR)
+age <- age %>% filter(data.FWK_EMPLR <2)
+boxplot(data.AGE~data.FWK_EMPLR, data=age, xlab="Looking for Work", ylab="Age", main="Age and looking for employment")
+"From the boxplot it appears that older people are trying harder to find a job with the average is 35 years old."
+
+
+lowerEducation <- data %>% filter(EDUC < 40) %>% filter(YEAR==2020)
+higherEducation <- data %>% filter(EDUC >= 40) %>% filter(YEAR==2020)
+higherEducation %>% ggplot(aes(y=EMPSTAT)) + geom_bar()
+lowerEducation %>% ggplot(aes(y=EMPSTAT)) + geom_bar()
+"By looking at both of the bar charts it is evident that people with higher education were employed more during COVID-19 with them having the same amount of people being employed as people with lower education, but there are less people in total that have higher education showing a strong correlation that people with higher education were more employed. "
+
+"In conclusion there was not a lot of correlation found between a better effort put towards oneself before and after the pandemic."
+
+"I Kyle Quagliano contributed everything to this document"
+
+
 ```
 
